@@ -21,14 +21,15 @@ app.config['db'] = db
 # Register the blueprint
 app.register_blueprint(app_bp, url_prefix='/api', db=db)
 
-# @app.route('/')
-# def create_question():
-#     # online_users = mongo.db.users.find({"online": True})
-#     # print(online_users)
-#     return jsonify({
-#         "data": {}
-#     }), 200
-# #
+
+@app.route('/', methods=['GET'])
+def create_question():
+    return jsonify({
+        "data": {}
+    }), 200
+
+
+#
 #
 # # @app.route('/question/create', methods=['POST'])
 # # def create_question():
@@ -66,4 +67,4 @@ app.register_blueprint(app_bp, url_prefix='/api', db=db)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

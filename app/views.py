@@ -80,3 +80,12 @@ def update_questions():
         }), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 400
+
+
+@app_bp.route('/', methods=['GET'])
+def test():
+    return jsonify({
+        "data": {},
+        "status": "success",
+        "message": "Questions Created Successfully"
+    }), 200
