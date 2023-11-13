@@ -1,15 +1,8 @@
 version: '3'
 
 services:
-  web:
-    image: questionpro_flask3:latest  # Replace with your actual Python image and tag
-    build: .
-#    ports:
-#      - "5001:5000"
-    volumes:
-      - .:/questionpro_flask
-    environment:
-      MONGO_URI: 'mongodb+srv://questionpro:aiml_capstone@questionpro.txcqcrj.mongodb.net/?retryWrites=true&w=majority'  # Replace with your actual MongoDB URI
-
-volumes:
-  mongodb-data:
+  questionpro_flask:
+    build: ./questionpro_flask
+    ports:
+      - "8000:8000"
+    network_mode: bridge

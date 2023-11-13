@@ -1,20 +1,18 @@
-FROM python:3.9.6
+FROM ubuntu:22.04
+MAINTAINER basisushil@gmail.com
 
-WORKDIR /questionpro_flask
-
-COPY . /questionpro_flask
+RUN apt-get update -y
+RUN apt-get install python3-pip -y
+RUN apt-get install gunicorn3 -y
 
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+COPY questionpro_flask /opt/
 
-#COPY . .
+RUN pip3 install -r requirments.txt
+WORKDIR /opt/
 
 
-# Set environment variables
-ENV FLASK_APP=run.py
-ENV FLASK_RUN_HOST=0.0.0.0
-
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn3", "-b", "0.0.0.0:8000", "app:app", "--workers=5"]
 
 
 # docker build -t questionpro_flask -f Dockerfile . --network=host
