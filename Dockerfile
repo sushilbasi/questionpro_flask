@@ -1,26 +1,22 @@
-FROM ubuntu:22.04
-MAINTAINER basisushil@gmail.com
+FROM python:3.9.18
 
-RUN apt-get update -y
-RUN apt-get install python3-pip -y
-RUN apt-get install gunicorn3 -y
+# Set the working directory to /opt/
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
-COPY questionpro_flask /opt/
+# Copy the requirements.txt and the entire questionpro_flask directory into the container
+COPY requirements.txt .
 
-RUN pip3 install -r requirments.txt
-WORKDIR /opt/
+# Install Python dependencies
+RUN pip install -r requirements.txt
 
+# Expose port 8000 for Gunicorn
+EXPOSE 8000
 
-CMD ["gunicorn3", "-b", "0.0.0.0:8000", "app:app", "--workers=5"]
+# Copy the content of the local src directory to the working directory
+COPY . .
 
+# Specify the command to run on container start
+CMD [ "python", "run.py" ]
 
-# docker build -t questionpro_flask -f Dockerfile . --network=host
-
-#docker run -d -p 5006:5000 questionpro_flask5:latest
-
-#docker-compose up
-
-# docker ps # to check the runing container
-
-# docker stop
+# Start Gunicorn to run the Flask app
+# CMD ["gunicorn3", "-b", "0.0.0.0:8000", "questionpro_flask.app:app", "--workers=5"]

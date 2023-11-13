@@ -22,7 +22,7 @@ app.config['db'] = db
 app.register_blueprint(app_bp, url_prefix='/api', db=db)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/test', methods=['GET'])
 def create_question():
     return jsonify({
         "data": {}
@@ -67,4 +67,4 @@ def create_question():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
