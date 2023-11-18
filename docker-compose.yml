@@ -2,7 +2,16 @@ version: '3'
 
 services:
   questionpro_flask:
-    build: ./questionpro_flask
+    build: .
     ports:
       - "8000:8000"
     network_mode: bridge
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    environment:
+      - SERVER_NAME=0.0.0.0
+    restart: always
+    network_mode: host
+
