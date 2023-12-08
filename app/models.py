@@ -3,9 +3,11 @@ from datetime import datetime
 
 
 class User:
-    def __init__(self, username, password, status):
+    def __init__(self, username, password, first_name, last_name, status):
         self.username = username
         self.password = password
+        self.first_name = first_name
+        self.last_name = last_name
         self.status = status
 
 
@@ -28,9 +30,9 @@ class ActiveQuestion:
 
 
 class DomainQuestion:
-    def __init__(self, user_id, title, created_date, search_result, act_questions):
+    def __init__(self, user_id,domain_id, title, created_date, context_list):
         self.user_id = user_id
+        self.domain_id = domain_id
         self.title = title
-        self.created_date = datetime.utcnow()
-        self.search_result = search_result
-        self.act_questions = act_questions
+        self.created_date = created_date
+        self.context_list = context_list
